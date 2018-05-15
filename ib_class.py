@@ -9,8 +9,8 @@ if __name__=="__main__":
     callback = IBWrapper()          # Instantiate IBWrapper 
     tws = EClientSocket(callback)   # Instantiate EClientSocket
     host = ""
-    port = 7496
-    clientId = 5000
+    port = 7497
+    clientId = 101
     tws.eConnect(host, port, clientId)     # Connect to TWS
     tws.setServerLogLevel(5)
     accountName = "DU123456"        # Change to your own account
@@ -31,7 +31,7 @@ if __name__=="__main__":
     # cancelPositions
     # positionEnd                                       self.positionEnd_flag
     ###################################################################################'''
-    print "Testing Account and Portfolio \n"
+    print("Testing Account and Portfolio \n")
     tws.reqAccountUpdates(1, accountName)
     tws.reqAccountSummary(1,"All","NetLiquidation")
     #tws.cancelAccountSummary(1)
@@ -58,7 +58,7 @@ if __name__=="__main__":
     # exerciseOptions   
     # reqGlobalCancel
     ###################################################################################'''
-    print "Testing Orders Group \n"
+    print("Testing Orders Group \n")
     # Example 1 - placing order to buy stock
     tws.reqIds(1)   # Need to request next valid order Id
     time.sleep(2)   # wait for response from server
@@ -131,12 +131,12 @@ if __name__=="__main__":
     # TwsConnectionTime
     #                      --->   error
     ###################################################################################'''       
-    print "Testing Connection and Server Group \n"
-    print  tws.isConnected()
+    print("Testing Connection and Server Group \n")
+    print(tws.isConnected())
     tws.setServerLogLevel(5)
     tws.reqCurrentTime()
-    print "Server Version " + str(tws.serverVersion())
-    print "TWS Connection Time %s " % tws.TwsConnectionTime()
+    print("Server Version " + str(tws.serverVersion()))
+    print("TWS Connection Time %s " % tws.TwsConnectionTime())
 
 
 
@@ -149,15 +149,15 @@ if __name__=="__main__":
     #                      --->   execDetailsEnd        self.exec_DetailsEnd_flag
     #                      --->   commissionReport      self.commission_Report
     ###################################################################################''' 
-    print "Testing Executions Group \n"
+    print("Testing Executions Group \n")
     order_id = []
     tws.reqIds(1)
     while not order_id:
         time.sleep(0.1)
         order_id = callback.next_ValidId
-        print "waiting for id"
+        print("waiting for id")
     order_id = callback.next_ValidId
-    print ("Just got it. The next order id is: ", order_id)
+    print("Just got it. The next order id is: ", order_id)
     contract_info5 = create.create_contract('EUR', 'CASH', 'IDEALPRO', 'USD')
     order_info5 = create.create_order(accountName, 'MKT', 100000, 'BUY')
     tws.placeOrder(order_id, contract_info5, order_info5)    
@@ -176,7 +176,7 @@ if __name__=="__main__":
     #                      --->   bondContractDetails   self.bond_ContractDetails_reqId
     #                                                   self.bond_ContractDetails
     ###################################################################################'''  
-    print "Testing Contract Group \n"
+    print("Testing Contract Group \n")
     # Example 1 - Option
     contract_Details6 = create.create_contract('NFLX 160318C00100000', 'OPT', 'SMART', 
                                                'USD', 'CALL', '100', '20160318', 
@@ -185,8 +185,8 @@ if __name__=="__main__":
     while not callback.contract_Details_flag:
         time.sleep(1)
     callback.contract_Details_flag = False
-    print callback.contract_Details_reqId    
-    print callback.contract_Details.__dict__   
+    print(callback.contract_Details_reqId)
+    print(callback.contract_Details.__dict__ )
 
     # Example 2 - Stock                                               
     contract_Details7 = create.create_contract('EUR', 'CASH', 'IDEALPRO', 'USD')
@@ -194,8 +194,8 @@ if __name__=="__main__":
     while not callback.contract_Details_flag:
         time.sleep(1)
     callback.contract_Details_flag = False
-    print callback.contract_Details_reqId    
-    print callback.contract_Details.__dict__    
+    print(callback.contract_Details_reqId    )
+    print(callback.contract_Details.__dict__)
     
     # Example 3 - FX    
     contract_Details8 = create.create_contract('IBCID143913442', 
@@ -205,8 +205,8 @@ if __name__=="__main__":
     while not callback.contract_Details_flag:
         time.sleep(1)
     callback.contract_Details_flag = False
-    print callback.bond_ContractDetails_reqId    
-    print callback.bond_ContractDetails.__dict__    
+    print(callback.bond_ContractDetails_reqId    )
+    print(callback.bond_ContractDetails.__dict__    )
     
     
     
@@ -216,11 +216,11 @@ if __name__=="__main__":
     # reqMktDepth          --->   updateMktDepth        self.update_MktDepth
     #                      --->   update_MktDepthL2     self.update_MktDepthL2
     ###################################################################################'''     
-    print "Testing Market Depth Group \n"
+    print("Testing Market Depth Group \n")
     contract_info9 = create.create_contract('EUR', 'CASH', 'IDEALPRO', 'USD')
     tws.reqMktDepth(7000, contract_info9, 3)
     time.sleep(5)
-    print callback.update_MktDepth
+    print(callback.update_MktDepth)
     tws.cancelMktDepth(7000)
 
 
@@ -233,7 +233,7 @@ if __name__=="__main__":
     #                                                   self.update_NewsBulletin_message
     #                                                   self.update_NewsBulletin_origExchange
     ###################################################################################'''     
-    print "Testing News Bulletin Group \n"
+    print("Testing News Bulletin Group \n")
     tws.reqNewsBulletins(1)
     time.sleep(20)
     tws.cancelNewsBulletins()
@@ -245,7 +245,7 @@ if __name__=="__main__":
     # Financial Advisors Group ###########################################################
     # reqManagedAccts      --->   managedAccounts       self.managed_Accounts
     ###################################################################################'''     
-    print "Testing Financial Advisors Group \n"
+    print("Testing Financial Advisors Group \n")
     tws.reqManagedAccts()    
     #tws.requestFA()       # non FA account. Unable to test.
     
@@ -257,7 +257,7 @@ if __name__=="__main__":
     # Historical Data ####################################################################
     # reqHistoricalData    --->   historicalData        self.historical_Data
     ###################################################################################'''        
-    print "Testing Historical Data Group \n"
+    print("Testing Historical Data Group \n")
     contract_Details10 = create.create_contract('EUR', 'CASH', 'IDEALPRO', 'USD')    
     data_endtime = datetime.now().strftime("%Y%m%d %H:%M:%S")
     tws.reqHistoricalData(9000, contract_Details10, data_endtime,
@@ -275,7 +275,7 @@ if __name__=="__main__":
     #                      --->   scannerDataEnd        self.scanner_Data_End_reqID    
     #                                                   self.scanner_Data_reqID  
     ###################################################################################'''        
-    print "Testing Market Scanners Group \n"
+    print("Testing Market Scanners Group \n")
     subscript = ScannerSubscription()
     subscript.numberOfRows(3)
     subscript.locationCode('STK.NYSE')
@@ -291,7 +291,7 @@ if __name__=="__main__":
     # Real Time Bars #####################################################################
     # reqRealTimeBars      --->   realtimeBar           self.real_timeBar
     ###################################################################################'''   
-    print "Testing Real Time Bars Group \n"
+    print("Testing Real Time Bars Group \n")
     contract_Details11 = create.create_contract('EUR', 'CASH', 'IDEALPRO', 'USD')    
     tws.reqRealTimeBars(10000, contract_Details11, 5, "MIDPOINT", 0)
     time.sleep(10)

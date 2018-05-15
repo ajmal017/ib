@@ -65,7 +65,7 @@ accountName = "DU000000"
 callback = IBWrapper()             # Instantiate IBWrapper. callback 
 tws = EClientSocket(callback)      # Instantiate EClientSocket and return data to callback
 host = ""
-port = 4002
+port = 7497
 clientId = 4002
 order_id = 1001
 
@@ -74,8 +74,8 @@ tws.eConnect(host, port, clientId) # Connect to TWS
 # Let's work with APPLE stock.
 create = contract()
 callback.initiate_variables()
-contract_Details = create.create_contract('AAPL', 'STK', 'SMART', 'USD')
-
+# contract_Details = create.create_contract('AAPL', 'STK', 'SMART', 'USD')
+contract_Details = create.create_contract('HSI', 'FUT', 'HKEX', 'HKD')
 '''
 This should be the beginning of the while loop
 This is an infinite loop.
